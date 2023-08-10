@@ -32,7 +32,7 @@ function Navbar() {
         </NavLink>
 
         <NavLink
-          to="crypto"
+          to="Startups"
           className={({ isActive }) =>
             isActive ? styles.activeStyle : styles.inActiveStyle
           }
