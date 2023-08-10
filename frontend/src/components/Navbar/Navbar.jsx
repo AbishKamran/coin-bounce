@@ -19,7 +19,7 @@ function Navbar() {
     <>
       <nav className={styles.navbar}>
         <NavLink to="/" className={`${styles.logo} ${styles.inActiveStyle}`}>
-          CoinBounce
+          Infinite
         </NavLink>
 
         <NavLink
@@ -37,7 +37,7 @@ function Navbar() {
             isActive ? styles.activeStyle : styles.inActiveStyle
           }
         >
-          Cryptocurrencies
+          Investing
         </NavLink>
 
         <NavLink

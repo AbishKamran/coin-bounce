@@ -1,44 +1,46 @@
 import { useState, useEffect } from "react";
-import Loader from "../../components/Loader/Loader";
-import { getAllBlogs } from "../../api/internal";
+import { getNews } from "../../api/external";
 import styles from "./Blog.module.css";
-import { useNavigate } from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
 
-function Blog() {
-  const navigate = useNavigate();
-
-  const [blogs, setBlogs] = useState([]);
+function Home() {
+  const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    (async function getAllBlogsApiCall() {
-      const response = await getAllBlogs();
-
-      if (response.status === 200) {
-        setBlogs(response.data.blogs);
-      }
+    (async function newsApiCall() {
+      const response = await getNews();
+      setArticles(response);
     })();
 
-    setBlogs([]);
+    // cleanup function
+    setArticles([]);
   }, []);
 
-  if (blogs.length === 0) {
-    return <Loader text="blogs" />;
+  const handleCardClick = (url) => {
+    window.open(url, "_blank");
+  };
+
+  if (articles.length == 0) {
+    return <Loader text="homepage" />;
   }
+
   return (
-    <div className={styles.blogsWrapper}>
-      {blogs.map((blog) => (
-        <div
-          id={blog._id}
-          className={styles.blog}
-          onClick={() => navigate(`/blog/${blog._id}`)}
-        >
-          <h1>{blog.title}</h1>
-          <img src={blog.photo} />
-          <p>{blog.content}</p>
-        </div>
-      ))}
-    </div>
+    <>
+      <div className={styles.header}>Latest Articles</div>
+      <div className={styles.grid}>
+        {articles.map((article) => (
+          <div
+            className={styles.card}
+            key={article.url}
+            onClick={() => handleCardClick(article.url)}
+          >
+            <img src={article.urlToImage} />
+            <h3>{article.title}</h3>
+          </div>
+        ))}
+      </div>
+    </>
   );
 }
 
-export default Blog;
+export default Home;

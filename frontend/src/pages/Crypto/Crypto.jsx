@@ -10,7 +10,7 @@ function Crypto() {
     // IIFE: immediately invoked function expression
     (async function cryptoApiCall() {
       const response = await getCrypto();
-      setData(response);
+      setData(response.data.slice(1));
     })();
 
     // Cleanup
@@ -18,7 +18,7 @@ function Crypto() {
   }, []);
 
   if (data.length === 0) {
-    return <Loader text="crytocurrenices" />;
+    return <Loader text="Startups" />;
   }
 
   const negativeStyle = {
@@ -33,35 +33,24 @@ function Crypto() {
     <table className={styles.table}>
       <thead>
         <tr className={styles.head}>
-          <th>#</th>
-          <th>Coin</th>
-          <th>Symbol</th>
-          <th>Price</th>
-          <th>24h</th>
+          <th>Bootsrap Startups</th>
+          <th>Industry Vertical</th>
+          <th>Sub Vertical</th>
+          <th>City</th>
+          <th>Amount(USD)</th>
         </tr>
       </thead>
       <tbody>
         {data.map((coin) => (
-          <tr id={coin.id} className={styles.tableRow}>
-            <td>{coin.market_cap_rank}</td>
-            <td>
-              <div className={styles.logo}>
-                <img src={coin.image} width={40} height={40} /> {coin.name}
-              </div>
-            </td>
-            <td>
-              <div className={styles.symbol}>{coin.symbol}</div>
-            </td>
-            <td>{coin.current_price}</td>
-            <td
-              style={
-                coin.price_change_percentage_24h < 0
-                  ? negativeStyle
-                  : positiveStyle
-              }
-            >
-              {coin.price_change_percentage_24h}
-            </td>
+          <tr id={coin.StartupName} className={styles.tableRow}>
+            <td>{coin.StartupName}</td>
+          
+            <td> {coin.IndustryVertical}</td>
+            <td> {coin.SubVertical}</td>
+            <td>{coin.CityLocation}</td>
+            <td>{coin.AmountInUSD}</td>
+           
+            
           </tr>
         ))}
       </tbody>
