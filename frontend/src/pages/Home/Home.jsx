@@ -15,7 +15,8 @@ const Home = () => {
 
         </div>
        <div> 
-        <p>  Join us now to become a shareholder in cutting-edge ventures with as little as 1/100th ownership stake. </p>
+        <img src= "home.jpeg" width="100%" height="100%" /> 
+
         </div> 
         </Fragment>
 
